@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Weather App</title>
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="bower_components/toastr/toastr.css" />
+    <link rel="stylesheet" href="bower_components/angular-toastr/dist/angular-toastr.css" />
+    <link rel="stylesheet" href="/app/styles/style.css">
+</head>
+
+<body ng-controller="MainController as vm">
+    <div class="container">
+        <div class="jumbotron">
+            <div class="container">
+                <h1 align="center">Origin Weather App</h1>
+                <p align="center">Always know if you need an umbrella!</p>
+            </div>
+        </div>
+        <div class="btn-group">
+            <button class="btn btn-primary" type="submit" ng-click="vm.getWeatherInfo('San Diego')">San Diego</button>
+            <button class="btn btn-primary" type="submit" ng-click="vm.getWeatherInfo('New York')">New York</button>
+            <button class="btn btn-primary" type="submit" ng-click="vm.getWeatherInfo('Washington, D. C.')">Washington D.C</button>
+            <button class="btn btn-primary" type="submit" ng-click="vm.getWeatherInfo('London')">London</button>
+            <button class="btn btn-primary" type="submit" ng-click="vm.getWeatherInfo('Tokyo')">Tokyo</button>
+        </div>
+        <div>
+            <div class="input-group form-group">
+                <input type="text" ng-model="searchPlace" class="form-control" placeholder="Search by city..">
+                <div class="input-group-btn">
+                    <button class="btn btn-default glyphicon glyphicon-globe" type="button" ng-click="vm.getWeatherInfo(searchPlace)">Go!</button>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <label>City Information</label>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row text-center">
+                            <label class="city col-md-12 text-center">
+                                <font size="5"><u>{{vm.name}}</u></font>
+                            </label>
+                        </div>
+                        <div class="row text-center">
+                            <label class="col-md-4">Temperature (F)</label>
+                            <label class="col-md-4">Pressure</label>
+                            <label class="col-md-4">Humidity</label>
+                        </div>
+                        <div class="row text-center">
+                            <label class="col-md-4">{{vm.temp}}</label>
+                            <label class="col-md-4">{{vm.pressure}}</label>
+                            <label class="col-md-4">{{vm.humidity}}</label>
+                        </div>
+                        <div class="row text-center">
+                            <label class="col-md-4">Lowest Temp (F)</label>
+                            <label class="col-md-4">Highest Temp (F)</label>
+                            <label class="col-md-4">Wind Speed</label>
+                        </div>
+                        <div class="row text-center">
+                            <label class="col-md-4">{{vm.lowtemp}}</label>
+                            <label class="col-md-4">{{vm.hightemp}}</label>
+                            <label class="col-md-4">{{vm.windspeed}}</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <label>Search History</label>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table-striped col-md-12">
+                            <tr ng-repeat="searchHistory in vm.searchHistories">
+                                <td>{{searchHistory.event}}</td>
+                                <td class="text-right">{{searchHistory.date | date: 'MM/dd/yyyy HH:mm:ss'}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular-toastr/dist/angular-toastr.tpls.js"></script>
+    <script src="/app/app.js"></script>
+    <script src="/app/weather-controller.js"></script>
+    <script src="/app/weather-factory.js"></script>
+</body>
+
+</html>
